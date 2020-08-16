@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(features = "src/test/resources/Features",
         glue = {"com.sugartech.sweetgirl.stepDefinition"},
         format = {"pretty","html:target/site/cucumber-pretty"},
-        tags = {"@AccountManagement"}
+        tags = {"@LogIn"}
 )
 public class TestRunner {
 }
