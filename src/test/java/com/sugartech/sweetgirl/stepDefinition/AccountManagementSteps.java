@@ -1,45 +1,58 @@
 package com.sugartech.sweetgirl.stepDefinition;
 
+import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
 public class AccountManagementSteps {
-    @io.cucumber.java.en.Given("^user is on create an account page$")
+    WebDriver driver;
+    @Given("^user is on create an account page$")
     public void userIsOnCreateAnAccountPage() {
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.get("http://demo-magento2.vuestorefront.io/");
+        driver.manage().window().maximize();
+        driver.findElement(By.linkText("Create an Account")).click();
     }
 
-    @io.cucumber.java.en.When("^user enters so \"([^\"]*)\"$")
-    public void userEntersSo(String arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new cucumber.api.PendingException();
+    @When("^user enters so \"([^\"]*)\"$")
+    public void userEntersSo(String FirstName) throws Throwable {
+        driver.findElement(By.id("firstname")).sendKeys(FirstName);
     }
 
-    @io.cucumber.java.en.And("^user enters a \"([^\"]*)\"$")
-    public void userEntersA(String arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new cucumber.api.PendingException();
+    @And("^user enters a \"([^\"]*)\"$")
+    public void userEntersA(String LastName) throws Throwable {
+        driver.findElement(By.id("lastname")).sendKeys(LastName);
     }
 
-    @io.cucumber.java.en.And("^user enters their \"([^\"]*)\" Address$")
-    public void userEntersTheirAddress(String arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new cucumber.api.PendingException();
+    @And("^user enters their \"([^\"]*)\" Address$")
+    public void userEntersTheirAddress(String Email) throws Throwable {
+        driver.findElement(By.name("email")).sendKeys(Email);
     }
 
-    @io.cucumber.java.en.And("^user enters that \"([^\"]*)\" on create account page$")
-    public void userEntersThatOnCreateAccountPage(String arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new cucumber.api.PendingException();
+    @And("^user enters that \"([^\"]*)\" on create account page$")
+    public void userEntersThatOnCreateAccountPage(String Password) throws Throwable {
+        driver.findElement(By.name("password")).sendKeys(Password);
     }
 
-    @io.cucumber.java.en.And("^user enters that to confirm the \"([^\"]*)\"$")
-    public void userEntersThatToConfirmThe(String arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new cucumber.api.PendingException();
+    @And("^user enters that to confirm the \"([^\"]*)\"$")
+    public void userEntersThatToConfirmThe(String ConfirmPassword) throws Throwable {
+        driver.findElement(By.name("password_confirmation")).sendKeys(ConfirmPassword);
     }
 
-    @io.cucumber.java.en.And("^user clicks on CreateAnAccount$")
+    @And("^user clicks on CreateAnAccount$")
     public void userClicksOnCreateAnAccount() {
+        driver.findElement(By.cssSelector("#form-validate > div > div.primary > button")).click();
     }
 
-    @io.cucumber.java.en.Then("^user MyAccount page is displayed\\.$")
+    @Then("^user MyAccount page is displayed\\.$")
     public void userMyAccountPageIsDisplayed() {
+        driver.close();
     }
 }
